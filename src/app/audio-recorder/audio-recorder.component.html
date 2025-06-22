@@ -1,0 +1,87 @@
+<div class="header">
+    <button class="back-btn" (click)="routeToGallery()">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+</div>
+<div class="center-container">
+
+    <div class="recorder-widget">
+        <div class="mic-circle">
+            <i class="fas fa-microphone"></i>
+        </div>
+
+        <!-- <app-waveform></app-waveform> -->
+        <div class="waveform" *ngIf="!showWaveform" [class.visible]="!showWaveform">
+            <div class="wave-container">
+                <!-- Static dummy waveform when showWaveform is false -->
+                <ng-container *ngIf="!showWaveform">
+                    <div *ngFor="let height of staticWaveformBars" class="wave-bar static-bar"
+                        [style.height.px]="height">
+                    </div>
+                </ng-container>
+            </div>
+            <div class="cancel-circle" *ngIf="btnText == 'Tap to play'">
+                <i class="fas fa-times" (click)="cancelRecording()"></i>
+            </div>
+
+        </div>
+        <!-- Waveform visualization -->
+        <div class="waveform" *ngIf="showWaveform" [class.visible]="showWaveform">
+            <div class="wave-container">
+                <!-- Dynamic waveform when showWaveform is true -->
+                <ng-container *ngIf="showWaveform">
+                    <div *ngFor="let height of waveformBars" class="wave-bar" [style.height.px]="height">
+                    </div>
+                </ng-container>
+
+                <!-- Static dummy waveform when showWaveform is false -->
+                <ng-container *ngIf="!showWaveform">
+                    <div *ngFor="let height of staticWaveformBars" class="wave-bar static-bar"
+                        [style.height.px]="height">
+                    </div>
+                </ng-container>
+            </div>
+            <div class="cancel-circle">
+                <i *ngIf="isPlaying || isRecording" class="fas fa-times" (click)="cancelRecording()"></i>
+            </div>
+        </div>
+
+        <!-- Timer display logic: show appropriate timer based on state -->
+        <div class="timer-container">
+            <!-- During recording: show recording progress -->
+            <div *ngIf="isRecording" class="timer recording-timer">{{ currentTime }}</div>
+
+            <!-- During playback: show playback progress -->
+            <div *ngIf="isPlaying" class="timer playback-timer">{{ playAudioTime }}</div>
+
+            <!-- When recording is complete but not playing: show total duration -->
+            <div *ngIf="recordingComplete && !isPlaying && !isRecording" class="timer completed-timer">
+                {{ playAudioTime }}
+            </div>
+
+            <!-- Initial state: show default -->
+            <div *ngIf="!isRecording && !isPlaying && !recordingComplete" class="timer initial-timer">
+                {{ currentTime }}
+            </div>
+        </div>
+
+        <!-- Play button - only show when recording is complete -->
+        <button *ngIf="recordingComplete" class="play-btn" (click)="playRecording()">
+            <div class="play-circle">
+                <i *ngIf="!isPlaying" class="fas fa-play"></i>
+                <i *ngIf="isPlaying" class="fas fa-pause"></i>
+            </div>
+        </button>
+
+        <!-- Record button - only show when not in playback mode -->
+        <button *ngIf="!recordingComplete" class="record-btn" (click)="startRecord()">
+            <div class="record-circle" [class.recording]="isRecording">
+                <i class="fas fa-stop"></i>
+            </div>
+        </button>
+
+        <!-- Action text -->
+        <div class="record-text">{{ btnText }}</div>
+    </div>
+</div>

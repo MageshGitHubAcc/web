@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="waveform-card">
+        <h1 class="title">Audio Waveform Visualization</h1>
+
+        <div class="waveform-container">
+            <div class="waveform-bars">
+                <div *ngFor="let height of waveformData; let i = index; trackBy: trackByIndex" class="wave-bar"
+                    [class.animate]="isAnimating" [style.height.px]="height"
+                    [style.animation-delay]="getAnimationDelay(i)" [style.animation-duration]="getAnimationDuration(i)">
+                </div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-primary" (click)="toggleAnimation()">
+                {{ isAnimating ? 'Stop Animation' : 'Start Animation' }}
+            </button>
+
+            <button class="btn btn-secondary" (click)="resetWaveform()">
+                Reset
+            </button>
+        </div>
+
+        <div class="description">
+            <p>This waveform represents audio frequency data with animated bars</p>
+        </div>
+    </div>
+</div>
