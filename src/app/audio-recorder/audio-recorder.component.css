@@ -1,0 +1,252 @@
+/* Basic styling for the audio recorder component */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.mic-circle i {
+    color: #d81b60;
+}
+
+.recorder-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+}
+
+.mic-circle {
+    margin-top: -70px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    border: 1px solid #7e7e7e;
+
+}
+
+/* Waveform container */
+.waveform {
+    position: relative;
+    height: 100px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: #d81b60; */
+    border-radius: 15px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+}
+
+.waveform.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Wave bars container */
+.wave-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    height: 60px;
+}
+
+/* Individual wave bars */
+.wave-bar {
+    width: 6px;
+    min-height: 10px;
+    background: linear-gradient(to top, #667eea, #d81b60);
+    border-radius: 3px;
+    transition: height 0.1s ease;
+    animation: wave-pulse 0.5s infinite alternate;
+}
+
+.wave-bar:nth-child(even) {
+    animation-delay: 0.1s;
+}
+
+.wave-bar:nth-child(3n) {
+    animation-delay: 0.2s;
+}
+
+@keyframes wave-pulse {
+    0% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Cancel button */
+.cancel-circle {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 30px;
+    height: 30px;
+    background: #f8f9fa;
+    border: 1px solid #7e7e7e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.cancel-circle i {
+    color: #333333;
+}
+
+.cancel-circle:hover {
+    background: rgba(255, 255, 245, 1);
+    transform: scale(1.1);
+}
+
+/* Timer styles */
+.timer-container {
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    font-family: 'Courier New', monospace;
+    background: rgba(102, 126, 234, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+}
+
+.recording-timer {
+    color: #ff3b30;
+    background: rgba(255, 59, 48, 0.1);
+    border-color: rgba(255, 59, 48, 0.2);
+    animation: recording-pulse 1s infinite;
+}
+
+.playback-timer {
+    color: #007aff;
+    background: rgba(0, 122, 255, 0.1);
+    border-color: rgba(0, 122, 255, 0.2);
+}
+
+@keyframes recording-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Button styles */
+.play-btn,
+.record-btn {
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.play-btn:hover,
+.record-btn:hover {
+    transform: scale(1.05);
+}
+
+.play-circle,
+.record-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.play-circle {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.record-circle {
+    background: #f8f9fa;
+}
+
+.record-circle i {
+    color: #d81b60;
+}
+
+.record-circle.recording {
+    animation: recording-pulse 1s infinite;
+    /* background: linear-gradient(135deg, #ff3b30 0%, #ff6b6b 100%); */
+}
+
+/* Text styles */
+.record-text {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.wave-bar.static-bar {
+    opacity: 0.5;
+    /* Make static bars more subtle */
+    background-color: #ccc;
+    /* Different color for static bars */
+}
+
+.back-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #000;
+    /* Icon color */
+}
+
+.back-btn:hover {
+    color: #FF4B9B;
+    /* Color change on hover */
+}
